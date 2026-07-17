@@ -69,7 +69,11 @@
     if ([state.category, state.tag, state.query].filter(Boolean).length > 1) {
       state.category = state.tag = "";
     }
-    state.exploreOpen = Boolean(state.category || state.tag || storage.get("oaArticlesExploreOpen") === "1");
+    const savedExploreState = storage.get("oaArticlesExploreOpen");
+    const compactViewport = window.matchMedia("(max-width: 620px)").matches;
+    state.exploreOpen = savedExploreState === null
+      ? Boolean(!compactViewport && (state.category || state.tag))
+      : savedExploreState === "1";
     state.moreOpen = Boolean(state.tag && secondaryTags.includes(state.tag));
   }
 
@@ -92,7 +96,7 @@
     state.tag = kind === "tag" ? value : "";
     state.query = kind === "query" ? value.trim() : "";
     state.visible = PAGE_SIZE;
-    state.exploreOpen = kind !== "query";
+    state.exploreOpen = kind !== "query" && !window.matchMedia("(max-width: 620px)").matches;
     state.moreOpen = Boolean(state.tag && secondaryTags.includes(state.tag));
     $("#articleSearch").value = state.query;
     writeUrl("push");
@@ -106,6 +110,7 @@
     state.query = "";
     state.visible = PAGE_SIZE;
     state.moreOpen = false;
+    if (window.matchMedia("(max-width: 620px)").matches) state.exploreOpen = false;
     $("#articleSearch").value = "";
     writeUrl("push");
     renderAll();
@@ -254,13 +259,19 @@
     const rows = filteredArticles();
     const shown = Math.min(state.visible, rows.length);
     const active = state.category || state.tag || state.query;
-    $("#resultTitle").textContent = active ? "篩選結果" : "最新文章";
+    let title = "更多文章";
+    let summary = "";
+    if (state.category) {
+      title = state.category;
+      summary = escapeHtml(categoryDescriptions[state.category]);
+    } else if (state.tag) {
+      title = `${state.tag} 相關文章`;
+    } else if (state.query) {
+      title = `「${state.query}」的搜尋結果`;
+      summary = rows.length ? `找到 ${rows.length} 篇文章` : "沒有找到相關文章";
+    }
+    $("#resultTitle").textContent = title;
     $("#clearFilters").hidden = !active;
-
-    let summary = `找到 ${rows.length} 篇文章`;
-    if (state.category) summary = `<strong>${escapeHtml(categoryDescriptions[state.category])}</strong> ${summary}・${escapeHtml(state.category)}`;
-    if (state.tag) summary += `・${escapeHtml(state.tag)}`;
-    if (state.query) summary = `搜尋「${escapeHtml(state.query)}」：${summary}`;
     $("#resultsSummary").innerHTML = summary;
 
     const grid = $("#articleGrid");

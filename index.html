@@ -46,19 +46,11 @@
       </button>
     </section>
 
-    <div class="content-wrap">
-      <section class="feature-grid" aria-label="編輯精選與家長熱門文章">
-        <div id="featuredArticle"></div>
-        <div class="popular-panel">
-          <h2 class="popular-heading" id="popularHeading">家長熱門</h2>
-          <div id="popularArticles"></div>
-        </div>
-      </section>
-
+    <div class="explore-wrap">
       <section class="explore" aria-labelledby="exploreTitle">
         <button type="button" class="explore-toggle" id="exploreToggle" aria-expanded="false" aria-controls="explorePanel">
-          <h2 id="exploreTitle">依關心的問題探索</h2>
-          <p>每次選擇一個分類或主題，避免篩選後只剩少量文章。</p>
+          <h2 id="exploreTitle">依關心的主題探索</h2>
+          <p>選一個方向，快速找到相關文章。</p>
           <span class="explore-action"><span id="exploreActionText">展開分類與主題</span><span class="explore-icon" aria-hidden="true">⌄</span></span>
           <span class="explore-current" id="exploreCurrent" hidden></span>
         </button>
@@ -74,10 +66,20 @@
           </div>
         </div>
       </section>
+    </div>
+
+    <div class="content-wrap">
+      <section class="feature-grid" aria-label="編輯精選與家長熱門文章">
+        <div id="featuredArticle"></div>
+        <div class="popular-panel">
+          <h2 class="popular-heading" id="popularHeading">家長熱門</h2>
+          <div id="popularArticles"></div>
+        </div>
+      </section>
 
       <section class="articles-section" id="articles" aria-labelledby="resultTitle">
         <div class="articles-heading">
-          <h2 id="resultTitle">最新文章</h2>
+          <h2 id="resultTitle">更多文章</h2>
           <button type="button" class="clear-button" id="clearFilters" hidden>清除篩選 ×</button>
         </div>
         <p class="results-summary" id="resultsSummary" role="status" aria-live="polite"></p>
