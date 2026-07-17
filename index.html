@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>橘蘋觀點｜兒童程式、AI 教育與升學認證指南</title>
+  <meta name="description" content="從 Scratch、Python、AI 到 APCS、ITS，提供家長清楚可信的兒童程式學習與科技教育指南。">
+  <link rel="stylesheet" href="./articles.css">
+</head>
+<body>
+  <header class="shell">
+    <b class="brand">橘子蘋果程式學苑</b>
+    <span class="shell-note">正式版沿用官網共用導覽列</span>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="hero-copy">
+        <div class="eyebrow">ORANGEAPPLE JOURNAL</div>
+        <h1 id="pageTitle">陪你看懂孩子的<br><em>程式學習與 AI 未來</em></h1>
+        <div class="hero-rule" aria-hidden="true"></div>
+        <p class="hero-intro">
+          <strong>陪孩子在 AI 時代學會思考與創造。</strong>
+          <span>從程式啟蒙、學習方法到升學認證，提供家長清楚、可信、能實際採取行動的教育指南。</span>
+        </p>
+
+        <form class="search-form" id="searchForm" role="search">
+          <label class="sr-only" for="articleSearch">搜尋橘蘋觀點文章</label>
+          <input id="articleSearch" name="q" type="search" autocomplete="off" placeholder="搜尋 Scratch、Python、APCS、AI……">
+          <button type="submit">搜尋文章</button>
+        </form>
+
+        <div class="quick-links" aria-label="快速探索">
+          <button type="button" data-quick-tag="兒童程式">孩子如何開始學程式？</button>
+          <button type="button" data-quick-category="親子教育">不知道課程怎麼選</button>
+          <button type="button" data-quick-category="升學與認證">升學與認證</button>
+          <button type="button" data-quick-tag="AI">AI 教育趨勢</button>
+        </div>
+      </div>
+
+      <button type="button" class="issue-card" data-quick-tag="AI" aria-label="探索 AI 教育相關文章">
+        <small>編輯專題｜AI 教育</small>
+        <h2>讓科技成為孩子創造世界的語言</h2>
+        <p>有觀點的教育內容，陪家長做出更好的學習選擇。</p>
+        <span class="issue-link">探索 AI 教育文章 →</span>
+      </button>
+    </section>
+
+    <div class="content-wrap">
+      <section class="feature-grid" aria-label="編輯精選與家長熱門文章">
+        <div id="featuredArticle"></div>
+        <div class="popular-panel">
+          <h2 class="popular-heading" id="popularHeading">家長熱門</h2>
+          <div id="popularArticles"></div>
+        </div>
+      </section>
+
+      <section class="explore" aria-labelledby="exploreTitle">
+        <button type="button" class="explore-toggle" id="exploreToggle" aria-expanded="false" aria-controls="explorePanel">
+          <h2 id="exploreTitle">依關心的問題探索</h2>
+          <p>每次選擇一個分類或主題，避免篩選後只剩少量文章。</p>
+          <span class="explore-action"><span id="exploreActionText">展開分類與主題</span><span class="explore-icon" aria-hidden="true">⌄</span></span>
+          <span class="explore-current" id="exploreCurrent" hidden></span>
+        </button>
+
+        <div class="explore-panel" id="explorePanel" hidden>
+          <div class="category-grid" id="categoryGrid" aria-label="文章分類"></div>
+          <div class="topic-panel">
+            <h3>熱門主題</h3>
+            <p class="topic-note">選擇新主題時，會取代目前的分類條件。</p>
+            <div class="topic-grid" id="primaryTopics"></div>
+            <button type="button" class="more-button" id="moreTopics" aria-expanded="false" aria-controls="secondaryTopics">更多主題</button>
+            <div class="topic-grid secondary-topics" id="secondaryTopics" hidden></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="articles-section" id="articles" aria-labelledby="resultTitle">
+        <div class="articles-heading">
+          <h2 id="resultTitle">最新文章</h2>
+          <button type="button" class="clear-button" id="clearFilters" hidden>清除篩選 ×</button>
+        </div>
+        <p class="results-summary" id="resultsSummary" role="status" aria-live="polite"></p>
+        <div class="article-grid" id="articleGrid"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <h3>沒有找到完全符合的文章</h3>
+          <p>可以縮短關鍵字，或直接從常用主題重新開始。</p>
+          <div class="empty-actions">
+            <button type="button" data-empty-action="all">看全部最新文章</button>
+            <button type="button" data-empty-action="Scratch">Scratch 入門</button>
+            <button type="button" data-empty-action="兒童程式">家長選課指南</button>
+          </div>
+        </div>
+
+        <button type="button" class="load-button" id="loadMore">再顯示 12 篇</button>
+        <p class="all-shown" id="allShown" hidden></p>
+      </section>
+    </div>
+
+    <section class="path-cta">
+      <div>
+        <small>FIND YOUR PATH</small>
+        <h2>不知道孩子適合從哪裡開始？</h2>
+        <p>依年級與學習目標，快速找到適合的程式學習方向。</p>
+      </div>
+      <a href="https://orangeapple.co/courses">幫孩子找學習方向 →</a>
+    </section>
+
+    <section class="trial-cta">
+      <div>
+        <small>先體驗，再決定</small>
+        <h2>讓孩子親自試一次，<br>答案會比想像更清楚。</h2>
+      </div>
+      <button type="button" data-oa-cta="bottom">預約免費體驗課</button>
+    </section>
+  </main>
+
+  <footer class="footer">橘蘋觀點｜陪家長看懂孩子的程式學習與 AI 未來</footer>
+
+  <script src="./articles-real.js"></script>
+  <script src="./articles-app.js"></script>
+</body>
+</html>
