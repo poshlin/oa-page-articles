@@ -164,7 +164,7 @@ img { max-width: 100%; }
   letter-spacing: -.055em;
   line-height: 1.15;
 }
-.hero h1 em { color: var(--orange); font-size: .9em; font-style: normal; }
+.hero h1 em { color: var(--orange); font-style: normal; }
 .hero-rule {
   width: min(100%, 720px);
   height: 4px;
