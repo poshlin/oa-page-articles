@@ -59,18 +59,18 @@ img { max-width: 100%; }
   left: 50%;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  width: min(960px, calc(100% - 32px));
+  width: min(760px, calc(100% - 32px));
   padding: 6px;
-  border: 1px solid rgba(172, 190, 183, .92);
+  border: 1px solid rgba(172, 190, 183, .8);
   border-left: 4px solid var(--orange);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .94);
-  box-shadow: 0 14px 38px rgba(24, 51, 45, .16), 0 4px 12px rgba(24, 51, 45, .08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 16px 42px rgba(24, 51, 45, .15), 0 3px 10px rgba(24, 51, 45, .06);
   backdrop-filter: blur(12px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(-50%, calc(-100% - 20px));
+  transform: translate(-50%, calc(-100% - 24px)) scale(.98);
   transition: opacity .2s ease, transform .24s ease, visibility .2s ease;
 }
 .sticky-search-form::before {
@@ -87,7 +87,7 @@ img { max-width: 100%; }
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0) scale(1);
 }
 .sticky-search-form input {
   min-width: 0;

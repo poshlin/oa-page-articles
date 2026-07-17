@@ -132,10 +132,19 @@
     const stickyInput = $("#stickyArticleSearch");
     if (!heroForm || !stickyForm || !heroInput || !stickyInput) return;
 
+    let hideTimer;
     const setVisible = (visible) => {
-      stickyForm.classList.toggle("is-visible", visible);
+      window.clearTimeout(hideTimer);
       stickyForm.setAttribute("aria-hidden", String(!visible));
       stickyForm.toggleAttribute("inert", !visible);
+
+      if (visible) {
+        stickyForm.hidden = false;
+        window.requestAnimationFrame(() => stickyForm.classList.add("is-visible"));
+      } else {
+        stickyForm.classList.remove("is-visible");
+        hideTimer = window.setTimeout(() => { stickyForm.hidden = true; }, 260);
+      }
     };
 
     heroInput.addEventListener("input", () => { stickyInput.value = heroInput.value; });
