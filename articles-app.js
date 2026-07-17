@@ -18,6 +18,10 @@
   };
 
   const $ = (selector) => document.querySelector(selector);
+  const searchInputs = () => [$("#articleSearch"), $("#stickyArticleSearch")].filter(Boolean);
+  function setSearchInputs(value) {
+    searchInputs().forEach((input) => { input.value = value; });
+  }
   const storage = {
     get(key) {
       try { return sessionStorage.getItem(key); } catch (_error) { return null; }
@@ -98,7 +102,7 @@
     state.visible = PAGE_SIZE;
     state.exploreOpen = kind !== "query" && !window.matchMedia("(max-width: 620px)").matches;
     state.moreOpen = Boolean(state.tag && secondaryTags.includes(state.tag));
-    $("#articleSearch").value = state.query;
+    setSearchInputs(state.query);
     writeUrl("push");
     renderAll();
     if (!options || options.scroll !== false) scrollToResults();
@@ -111,7 +115,7 @@
     state.visible = PAGE_SIZE;
     state.moreOpen = false;
     if (window.matchMedia("(max-width: 620px)").matches) state.exploreOpen = false;
-    $("#articleSearch").value = "";
+    setSearchInputs("");
     writeUrl("push");
     renderAll();
     if (!options || options.scroll !== false) scrollToResults();
@@ -119,6 +123,41 @@
 
   function scrollToResults() {
     $("#articles").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function initStickySearch() {
+    const heroForm = $("#searchForm");
+    const stickyForm = $("#stickySearchForm");
+    const heroInput = $("#articleSearch");
+    const stickyInput = $("#stickyArticleSearch");
+    if (!heroForm || !stickyForm || !heroInput || !stickyInput) return;
+
+    const setVisible = (visible) => {
+      stickyForm.classList.toggle("is-visible", visible);
+      stickyForm.setAttribute("aria-hidden", String(!visible));
+      stickyForm.toggleAttribute("inert", !visible);
+    };
+
+    heroInput.addEventListener("input", () => { stickyInput.value = heroInput.value; });
+    stickyInput.addEventListener("input", () => { heroInput.value = stickyInput.value; });
+
+    stickyForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = stickyInput.value.trim();
+      if (value) setSingleFilter("query", value);
+      else clearFilters();
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        setVisible(!entry.isIntersecting && entry.boundingClientRect.bottom < 0);
+      }, { threshold: 0 });
+      observer.observe(heroForm);
+    } else {
+      const update = () => setVisible(heroForm.getBoundingClientRect().bottom < 0);
+      window.addEventListener("scroll", update, { passive: true });
+      update();
+    }
   }
 
   function imageMarkup(article, className, eager) {
@@ -341,12 +380,13 @@
 
   window.addEventListener("popstate", () => {
     readUrlState();
-    $("#articleSearch").value = state.query;
+    setSearchInputs(state.query);
     renderAll();
   });
 
   readUrlState();
-  $("#articleSearch").value = state.query;
+  setSearchInputs(state.query);
+  initStickySearch();
   renderEditorial();
   renderAll();
 })();
