@@ -46,3 +46,6 @@ next-env.d.ts
 # Internal data sync and non-public working documents
 /sync_real_articles.py
 /HANDOFF.md
+
+# 內部專案記憶，不發布
+CLAUDE.md
