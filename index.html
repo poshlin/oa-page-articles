@@ -32,17 +32,29 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        "@type": ["EducationalOrganization", "Organization"],
+        "@id": "https://orangeapple.co/#organization",
         "name": "橘子蘋果程式學苑",
-        "url": "https://orangeapple.co"
+        "url": "https://orangeapple.co",
+        "logo": "https://orangeapple.co/logo.png"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://orangeapple.co/#website",
+        "url": "https://orangeapple.co/",
+        "name": "橘子蘋果程式學苑",
+        "publisher": { "@id": "https://orangeapple.co/#organization" },
+        "inLanguage": "zh-TW"
       },
       {
         "@type": "CollectionPage",
+        "@id": "https://poshlin.github.io/oa-page-articles/#webpage",
         "name": "橘蘋觀點",
         "description": "橘子蘋果程式學苑的教育觀點專欄，涵蓋程式學習、AI 教育、升學認證與親子教育。",
         "url": "https://poshlin.github.io/oa-page-articles/",
-        "isPartOf": { "@type": "WebSite", "name": "橘子蘋果程式學苑", "url": "https://orangeapple.co" },
-        "publisher": { "@type": "Organization", "name": "橘子蘋果程式學苑", "url": "https://orangeapple.co" }
+        "isPartOf": { "@id": "https://orangeapple.co/#website" },
+        "publisher": { "@id": "https://orangeapple.co/#organization" },
+        "inLanguage": "zh-TW"
       }
     ]
   }
